@@ -1,0 +1,33 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "simple bookstore api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zahranabilla/bookstore.git"
+  },
+  "keywords": [
+    "node",
+    "rest",
+    "api",
+    "bookstore"
+  ],
+  "author": "Zahra Abi Nabilla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zahranabilla/bookstore/issues"
+  },
+  "homepage": "https://github.com/zahranabilla/bookstore#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.1",
+    "sequelize": "^5.9.4"
+  }
+}
