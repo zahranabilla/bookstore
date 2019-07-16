@@ -16,9 +16,8 @@ Book.init({
         type: Sequelize.ENUM,
         values: ['Science', 'Biography', 'Computer', 'Magazine', 'Computer']
     },
-    price: {
-        type: Sequelize.INTEGER
-    }
+    price: Sequelize.INTEGER,
+    stock: Sequelize.INTEGER
 }, {sequelize, modelName: 'book'})
 
 module.exports = Book;
