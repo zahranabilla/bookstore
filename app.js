@@ -28,9 +28,11 @@ Book.hasMany(OrderItem, {as: 'Details'})
 
 // Import routes
 const homeRoute = require('./routes/home');
+const bookRoute = require('./routes/book');
 
 // Defines routes
 app.use('/', homeRoute);
+app.use('/book', bookRoute);
 
 // Listen port
 app.listen(3000, () => {
