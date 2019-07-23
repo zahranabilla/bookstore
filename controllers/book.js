@@ -63,25 +63,6 @@ module.exports.postBookGenerate = (req, res, next) => {
         })
 }
 
-module.exports.postBookUpdate = (req, res, next) => {
-    var values = {
-        title: req.body.title,
-        cat: req.body.cat
-    }
-
-    Book
-        .update(values, 
-            {where: 
-                {id: req.params.id}
-            })
-        .then((book) => {
-            res.json(book)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-}
-
 module.exports.getAllBook = (req, res) => {
     Book
         .findAll({})
