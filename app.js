@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-const sequelize = require('./config/db')
 
 const app = express();
 
@@ -39,8 +38,6 @@ app.use('/order', orderRouter)
 app.use('/user', userRouter)
 
 // Listen port
-app.listen(3000, () => {
+app.listen(3106, () => {
     console.log('server is up')
-    sequelize.sync();
-    
 })
