@@ -1,46 +1,80 @@
-const Books = require("../models/book");
+const Book = require("../models/book");
+const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
+
+dotenv.config();
 
 module.exports.postBook = (req, res)=>{
-	Books.create({
-        title: req.body.title,
-        cat: req.body.cat,
-        price: req.body.price,
-        stock: req.body.stock
-	}).then((book)=>{
-		res.json(book);
-	}).catch((error)=>{
-		throw error;
-	})
+    jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+        if(error){
+            res.status(403)
+        } else {
+            if(authData.role == "user"){
+                res.status(403).send('You are not authorized')
+            } else {
+                Book.create({
+                    title: req.body.title,
+                    cat: req.body.cat,
+                    price: req.body.price,
+                    stock: req.body.stock
+                }).then((book)=>{
+                    res.json(book);
+                }).catch((error)=>{
+                    throw error;
+                })
+            }
+        }
+    })
 }
 
 module.exports.putBook = (req,res)=>{
-	Books.update({
-		title: req.body.title,
-        cat: req.body.cat,
-        price: req.body.price,
-        stock: req.body.stock
-	},
-	{
-		where: {
-			id: req.params.id
-		}
-	}).then((book)=>{
-		res.json(book);
-	}).catch((error)=>{
-		throw error;
-	})
+    jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+        if(error){
+            res.status(403)
+        } else {
+            if(authData.role == "user"){
+                res.status(403).send('You are not authorized')
+            } else {
+                Book.update({
+                    title: req.body.title,
+                    cat: req.body.cat,
+                    price: req.body.price,
+                    stock: req.body.stock
+                },
+                {
+                    where: {
+                        id: req.params.id
+                    }
+                }).then((book)=>{
+                    res.json(book);
+                }).catch((error)=>{
+                    throw error;
+                })
+            }
+        }
+    })
 }
 
 module.exports.deleteBook = (req,res)=>{
-	Books.destroy({
-		where: {
-			id: req.params.id
-		}
-	}).then((book)=>{
-		res.json(book);
-	}).catch((error)=>{
-		throw error;
-	})
+    jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+        if(error){
+            res.status(403)
+        } else {
+            if(authData.role == "user"){
+                res.status(403).send('You are not authorized')
+            } else {
+                Book.destroy({
+                    where: {
+                        id: req.params.id
+                    }
+                }).then((book)=>{
+                    res.json(book);
+                }).catch((error)=>{
+                    throw error;
+                })
+            }
+        }
+    })
 }
 
 module.exports.postBookGenerate = (req, res, next) => {
@@ -107,36 +141,66 @@ module.exports.postBookGenerate = (req, res, next) => {
 }
 
 module.exports.getAllBook = (req, res) => {
-    Book
-        .findAll({})
-        .then(books => {
-            res.json(books)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+    jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+        if(error){
+            res.status(403)
+        } else {
+            if(authData.role == "admin"){
+                res.status(403).send('You are not authorized')
+            } else {
+                Book
+                    .findAll({})
+                    .then(books => {
+                        res.json(books)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
+    })
 }
 
 module.exports.getBookDetail = (req, res) => {
-    Book
-        .findByPk(req.params.id)
-        .then(book => {
-            res.json(book)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+    jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+        if(error){
+            res.status(403)
+        } else {
+            if(authData.role == "admin"){
+                res.status(403).send('You are not authorized')
+            } else {
+                Book
+                    .findByPk(req.params.id)
+                    .then(book => {
+                        res.json(book)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
+    })
 }
 
 module.exports.getBookByCat = (req, res) => {
-    Book
-        .findAll({
-            where: {cat: req.params.cat}
-        })
-        .then(books => {
-            res.json(books)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+    jwt.verify(req.token, process.env.SECRETKEY, (error, authData) => {
+        if(error){
+            res.status(403)
+        } else {
+            if(authData.role == "admin"){
+                res.status(403).send('You are not authorized')
+            } else {
+                Book
+                    .findAll({
+                        where: {cat: req.params.cat}
+                    })
+                    .then(books => {
+                        res.json(books)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            }
+        }
+    })
 }
