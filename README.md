@@ -21,7 +21,7 @@ User:
   
 # Cara Mengakses
 
-1. Download Postman collection
+1. Download Postman collection (https://tinyurl.com/tubesweb)
 2. Import collection pada Aplikasi Postman
 3. Login terlebih dahulu (username dan password telah terisikan)
 4. Copy token, dan paste pada Head 'Authorization' setelah *bearer* pada setiap request
